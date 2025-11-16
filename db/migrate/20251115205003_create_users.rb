@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
     create_table :users do |t|
       t.string :name, null: false
       t.string :email, null: false
+      # Authlogic fields
       t.string :crypted_password, null: false
       t.string :password_salt, null: false
       t.string :persistence_token, null: false
