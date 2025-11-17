@@ -2,7 +2,7 @@ PATH
   remote: engines/core
   specs:
     core (0.1.0)
-      rails (>= 7.1.6)
+      rails (~> 7.1.6)
 
 GEM
   remote: https://rubygems.org/
@@ -94,7 +94,7 @@ GEM
     base64 (0.3.0)
     benchmark (0.5.0)
     bigdecimal (3.3.1)
-    bootsnap (1.18.6)
+    bootsnap (1.19.0)
       msgpack (~> 1.2)
     builder (3.3.0)
     celluloid (0.18.0)
@@ -313,7 +313,6 @@ PLATFORMS
   arm-linux-musl
   arm64-darwin
   x86_64-darwin
-  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
