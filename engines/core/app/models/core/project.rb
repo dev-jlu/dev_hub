@@ -1,0 +1,10 @@
+module Core
+  class Project < ApplicationRecord
+    # Validations
+    validates :name, presence: true, uniqueness: true
+    validates :description, length: { maximum: 1000 }
+
+    # Associations
+    has_many :tasks, class_name: "Core::Task", dependent: :destroy
+  end
+end

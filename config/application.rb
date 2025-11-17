@@ -34,5 +34,10 @@ module DevHub
     # Auto-load engines
     config.autoload_paths += Dir["#{config.root}/engines/*/app/*"]
     config.eager_load_paths += Dir["#{config.root}/engines/*/app/*"]
+
+    # Auto-load migrations
+    config.paths['db/migrate'].concat(
+      Dir["#{config.root}/engines/*/db/migrate"]
+    )
   end
 end
