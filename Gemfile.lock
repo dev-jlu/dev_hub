@@ -1,4 +1,10 @@
 PATH
+  remote: engines/admin
+  specs:
+    admin (0.1.0)
+      rails (>= 7.1.6)
+
+PATH
   remote: engines/core
   specs:
     core (0.1.0)
@@ -317,6 +323,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  admin!
   authlogic (~> 6.4)
   bootsnap
   core!
