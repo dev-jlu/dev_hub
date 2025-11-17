@@ -63,3 +63,5 @@ gem "graphql", "~> 2.1"
 # Background jobs
 gem "sidekiq", "~> 2.1"
 
+# Local Engines
+gem 'core', path: 'engines/core'

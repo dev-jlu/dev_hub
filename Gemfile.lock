@@ -1,3 +1,9 @@
+PATH
+  remote: engines/core
+  specs:
+    core (0.1.0)
+      rails (>= 7.1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -314,6 +320,7 @@ PLATFORMS
 DEPENDENCIES
   authlogic (~> 6.4)
   bootsnap
+  core!
   database_cleaner-active_record
   debug
   factory_bot_rails (~> 6.2)
