@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   # Mount Core engine
   mount Core::Engine => "/"
+  mount Admin::Engine => "/admin"
 end

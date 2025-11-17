@@ -5,5 +5,8 @@ module Core
 
     # Associations
     belongs_to :record, polymorphic: true
+
+    # Scopes
+    scope :recent, ->(limit = 50) { order(created_at: :desc).limit(limit) }
   end
 end

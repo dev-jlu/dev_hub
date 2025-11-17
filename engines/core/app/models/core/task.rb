@@ -17,7 +17,7 @@ module Core
     belongs_to :assignee, polymorphic: true, optional: true
 
     # Scopes
-    scope :recent, ->(limit = 10) { order(created_at: desc).limit(limit) }
+    scope :recent, ->(limit = 10) { order(created_at: :desc).limit(limit) }
     scope :assigned_to, ->(user) { where(assignee: user) }
 
     # Callbacks
