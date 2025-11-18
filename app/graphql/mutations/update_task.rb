@@ -1,5 +1,5 @@
 module Mutations
-  class UpdateTask < BaseMutation
+  class UpdateTask < ProtectedMutation
     description "Update a task"
 
     # Input arguments

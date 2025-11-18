@@ -14,6 +14,7 @@ module Types
     end
 
     def projects(limit:)
+      authenticate!
       return Core::Project.recent(limit)
     end
 
@@ -22,6 +23,7 @@ module Types
     end
 
     def project(id:)
+      authenticate!
       return Core::Project.find(id)
     end
 
@@ -33,6 +35,7 @@ module Types
     end
 
     def tasks(status: nil, project_id: nil, limit: 20)
+      authenticate!
       tasks = Core::Task.all
       tasks = tasks.where(status: status) if status.present?
       tasks = tasks.where(project_id: project_id) if project_id.present?
@@ -44,6 +47,7 @@ module Types
     end
 
     def task(id:)
+      authenticate!
       return Core::Task.find(id)
     end
 
@@ -51,6 +55,7 @@ module Types
     field :users, [Types::UserType], null: false, description: "Get all users"
 
     def users
+      authenticate!
       return User.all
     end
 
@@ -66,7 +71,17 @@ module Types
     end
 
     def activities(limit: 50)
+      authenticate!
       return Core::Activity.recent(limit)
+    end
+
+    # Private Methods
+    private
+
+    def authenticate!
+      user = context[:current_user]
+      raise GraphQL::ExecutionError, "Unauthorized" unless user
+      return user
     end
   end
 end

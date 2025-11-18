@@ -1,5 +1,5 @@
 module Mutations
-  class CreateProject < BaseMutation
+  class CreateProject < ProtectedMutation
     description "Create a new project"
 
     # Input arguments

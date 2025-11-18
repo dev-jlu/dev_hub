@@ -12,5 +12,10 @@ module Types
     field :update_task, mutation: Mutations::UpdateTask
     field :update_task_status, mutation: Mutations::UpdateTaskStatus
     field :delete_task, mutation: Mutations::DeleteTask
+
+    # User mutations
+    field :create_user, mutation: Mutations::CreateUser
+    field :login, mutation: Mutations::Login
+    field :logout, mutation: Mutations::Logout
   end
 end

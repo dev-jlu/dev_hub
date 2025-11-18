@@ -1,5 +1,5 @@
 module Mutations
-  class UpdateProject < BaseMutation
+  class UpdateProject < ProtectedMutation
     description "Update a project"
 
     # Input arguments

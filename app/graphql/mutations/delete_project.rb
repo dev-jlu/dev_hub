@@ -1,5 +1,5 @@
 module Mutations
-  class DeleteProject < BaseMutation
+  class DeleteProject < ProtectedMutation
     description "Delete a project"
 
     # Input arguments

@@ -1,5 +1,5 @@
 module Mutations
-  class DeleteTask < BaseMutation
+  class DeleteTask < ProtectedMutation
     description "Delete a task"
 
     # Input arguemnts

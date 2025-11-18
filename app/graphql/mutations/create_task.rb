@@ -1,5 +1,5 @@
 module Mutations
-  class CreateTask < BaseMutation
+  class CreateTask < ProtectedMutation
     description "Create a new task"
 
     # Input arguments
