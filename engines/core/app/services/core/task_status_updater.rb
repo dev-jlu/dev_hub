@@ -2,7 +2,7 @@ module Core
   class TaskStatusUpdater
     attr_reader :task, :new_status, :errors
 
-    def initializer(task, new_status)
+    def initialize(task, new_status)
       @task = task
       @new_status = new_status
       @errors = []

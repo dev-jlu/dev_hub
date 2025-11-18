@@ -20,14 +20,14 @@ module Core
     scope :recent, ->(limit = 10) { order(created_at: :desc).limit(limit) }
     scope :assigned_to, ->(user) { where(assignee: user) }
 
-    # Callbacks
-    after_save :log_status_change, if: :saved_change_to_status?
+    # # Callbacks
+    # after_save :log_status_change, if: :saved_change_to_status?
 
-    # Private Methods
-    private
+    # # Private Methods
+    # private
 
-    def log_status_change
-      ActivityLoggerJob.perform_later(self, "status_changed")
-    end
+    # def log_status_change
+    #   ActivityLoggerJob.perform_later(self, "status_changed")
+    # end
   end
 end
