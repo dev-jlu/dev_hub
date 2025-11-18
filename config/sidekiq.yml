@@ -1,0 +1,17 @@
+concurrency: 5
+timeout: 25
+verbose: true
+
+queues:
+  - default
+  - mailers
+  - active_storage_analysis
+  - active_storage_purge
+
+# Development
+development:
+  concurrency: 2
+
+# Production
+production:
+  concurrency: 10

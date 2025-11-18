@@ -48,5 +48,8 @@ module DevHub
     config.paths['db/migrate'].concat(
       Dir["#{config.root}/engines/*/db/migrate"]
     )
+
+    # Use Sidekiq for background jobs
+    config.active_job_queue_adapter = :sidekiq
   end
 end
