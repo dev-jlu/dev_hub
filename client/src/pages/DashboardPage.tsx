@@ -1,9 +1,11 @@
+import MainLayout from "../layouts/MainLayout";
+
 const DashboardPage = () => {
     return (
-        <div style={{ padding: "20px" }}>
+        <MainLayout>
             <h1>Dashboard</h1>
-            <p>Main Panel with tasks and projects assigned</p>
-        </div>
+            <p>Here is your panel with assigned tasks and projects</p>
+        </MainLayout>
     );
 };
 
