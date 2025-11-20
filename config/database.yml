@@ -78,7 +78,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: dev_hub_production
-  username: dev_hub
-  password: <%= ENV["DEV_HUB_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
