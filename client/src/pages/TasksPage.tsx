@@ -1,22 +1,27 @@
+import { useQuery } from "@apollo/client/react";
 import TaskCard from "../components/cards/TaskCard";
 import MainLayout from "../layouts/MainLayout";
-
-// Sample Tasks
-const sampleTasks = [
-    { title: "Fix login bug", description: "Resolve issue with Authlogic", status: "pending" },
-    { title: "Add GraphQL endpoint", description: "Create tasks query", status: "in_progress" },
-    { title: "Add Users Groups", description: "Create users groups", status: "cancelled" },
-    { title: "Deploy to Render", description: "Deploy Rails + React", status: "completed" },
-];
+import { GET_TASKS } from "../graphql/queries";
+import type { GetTasksQuery } from "../graphql/types";
 
 const TasksPage = () => {
+    const { loading, error, data } = useQuery<GetTasksQuery>(GET_TASKS, {
+        variables: { limit: 20 },
+    });
+
+    if (loading) {
+        return <MainLayout>Loading tasks...</MainLayout>;
+    }
+    if (error) {
+        return <MainLayout>Error loading tasks</MainLayout>;
+    }
     return (
         <MainLayout>
             <h1>Tasks</h1>
             {
-                sampleTasks.map((task, index) => (
+                data!.tasks.map((task: any) => (
                     <TaskCard 
-                        key={index}
+                        key={task.id}
                         title={task.title}
                         description={task.description}
                         status={task.status as "pending" | "in_progress" | "cancelled" | "completed"} />
