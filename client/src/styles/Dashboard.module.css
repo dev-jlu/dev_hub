@@ -1,0 +1,117 @@
+.welcomeTitle {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.sectionContainer {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.sectionHeader h2 {
+    font-size: 1.6rem;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.viewAllLink {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.viewAllLink:hover {
+    text-decoration: underline;
+}
+
+.cardList {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+@media (max-width: 768px) {
+    .cardList {
+        flex-wrap: nowrap;
+    }
+}
+
+.widgetGrid {
+    display: #ffffff;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.widgetCard {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+}
+
+.widgetCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.widgetCard h2 {
+    font-size: 1rem;
+    color: #777;
+    margin: 0 0 10px 0;
+}
+
+.widgetValue {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: 800;
+    margin: 0;
+}
+
+.taskCardStyle {
+    min-width: 300px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #eee;
+}
+
+.taskCardStyle:hover {
+    transform: translateY(-2px);
+}
+
+.projectCardStyle {
+    min-width: 350px;
+    background: #f0f7ff;
+    border: 1px solid #cce0ff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.projectCardStyle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.emptyState {
+    color: #999;
+    font-style: italic;
+    padding: 10px 0;
+}

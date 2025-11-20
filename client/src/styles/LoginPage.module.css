@@ -1,0 +1,97 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7f9;
+    padding: 20px;
+}
+
+.loginCard {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.title {
+    color: #333333;
+    margin-bottom: 8px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #777777;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inputGroup {
+    text-align: left;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500px;
+    color: #555555;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.submitButton {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.submitButton:hover {
+    background-color: #0056b3;
+}
+
+.submitButton:active {
+    transform: scale(0.99);
+}
+
+.footerLink {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerLink a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+

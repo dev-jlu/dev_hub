@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import styles from "../styles/MainLayout.module.css";
 
 type Props = {
     children: ReactNode;
@@ -7,41 +8,31 @@ type Props = {
 
 const MainLayout = ({ children }: Props) => {
     return (
-        <div style={{ display: "flex", minHeight: "100vh" }}>
+        <div className={styles.container}>
             {/* Sidebar */}
-            <aside style={{
-                width: "200px",
-                background: "#2c3e50",
-                color: "#ecf0f1",
-                padding: "20px",
-            }}>
-                <h2>DevHub</h2>
+            <aside className={styles.sidebar}>
+                <h2 className={styles.logo}>DevHub</h2>
                 <nav>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
-                        <li><Link style={{ color: "ecf0f1" }} to="/dashboard">Dashboard</Link></li>
-                        <li><Link style={{ color: "ecf0f1" }} to="/tasks">Tasks</Link></li>
-                        <li><Link style={{ color: "ecf0f1" }} to="/projects">Projects</Link></li>
+                    <ul className={styles.navList}>
+                        <li className={styles.navItem}><Link className={styles.navLink} to="/dashboard">Dashboard</Link></li>
+                        <li className={styles.navItem}><Link className={styles.navLink} to="/tasks">Tasks</Link></li>
+                        <li className={styles.navItem}><Link className={styles.navLink} to="/projects">Projects</Link></li>
                     </ul>
                 </nav>
             </aside>
 
             {/* Main content */}
-            <main style={{ flexGrow: 1, padding: 2 }}>
+            <main className={styles.mainContent}>
                 {/* Navbar */}
-                <header style={{
-                    height: "60px",
-                    borderBottom: "1px solid #bdc3c7",
-                    marginBottom: "20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0 20px",
-                }}>
-                    <button>Logout</button>
+                <header className={styles.header}>
+                    <div className={styles.headerInfo}>Hello, User!</div>
+                    <button className={styles.logoutButton}>Logout</button>
                 </header>
 
                 {/* Page content */}
-                <div>{children}</div>
+                <div className={styles.pageContent}>
+                    {children}
+                </div>
             </main>
         </div>
     );

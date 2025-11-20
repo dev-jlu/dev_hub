@@ -1,0 +1,60 @@
+.pageTitle {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.emptyState {
+    text-align: center;
+    color: #777;
+    margin-top: 50px;
+    font-style: italic;
+}
+
+.kanbanContainer {
+    display: flex; 
+    gap: 30px;
+    padding: 10px 0;
+    overflow-x: auto;
+    align-items: flex-start;
+    min-height: 70vh;
+}
+
+.kanbanColumn {
+    background-color: #f4f7f9;
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 320px;
+    max-width: 350px; 
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.columnHeader {
+    font-size: 1.3rem;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fullTaskCard {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.fullTaskCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}

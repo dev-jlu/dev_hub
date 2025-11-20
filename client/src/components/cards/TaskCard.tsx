@@ -1,10 +1,11 @@
 type TaskCardProps = {
-    title: string,
-    description: string,
+    title: string;
+    description: string;
     status: "pending" | "in_progress" | "cancelled" | "completed";
+    className?: string;
 };
 
-const TaskCard = ({ title, description, status }: TaskCardProps) => {
+const TaskCard = ({ title, description, status, className }: TaskCardProps) => {
     let borderColor = "#3498db";
     if (status == "in_progress") {
         borderColor = "#f1c40f";
@@ -15,16 +16,17 @@ const TaskCard = ({ title, description, status }: TaskCardProps) => {
     }
 
     return (
-        <div style={{
-            border: `2px solid ${borderColor}`,
-            borderRadius: 8,
-            padding: 16,
-            marginBottom: 12,
-            backgroundColor: "#fff",
-        }}>
+        <div className={className} 
+            style={{
+                borderLeft: `5px solid ${borderColor}`
+            }
+        }>
             <h3>{title}</h3>
             <p>{description}</p>
-            <small>{status.replace("_", " ")}</small>
+            <small style={{
+                fontWeight: 'bold',
+                color: borderColor
+            }}>{status.replace("_", " ")}</small>
         </div>
     );
 };

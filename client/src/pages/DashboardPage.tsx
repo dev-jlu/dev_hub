@@ -4,6 +4,7 @@ import { type GetTasksQuery, type GetCurrentUserQuery, type GetProjectsQuery } f
 import { GET_CURRENT_USER, GET_PROJECTS, GET_TASKS } from "../graphql/queries";
 import TaskCard from "../components/cards/TaskCard";
 import ProjectCard from "../components/cards/ProjectCard";
+import styles from "../styles/Dashboard.module.css"
 
 const DashboardPage = () => {
     const { data: userData, loading: userLoading, error: userError } = useQuery<GetCurrentUserQuery>(GET_CURRENT_USER);
@@ -24,41 +25,73 @@ const DashboardPage = () => {
     }
 
     const user = userData?.currentUser;
-    const tasks = tasksData?.tasks;
+    const tasks = tasksData?.tasks || [];
+    const totalTasks = tasks?.length;
+    const incompleteTasks = tasks?.filter(t => t.status !== 'completed').length;
+    const urgentTasks = tasks.slice(0, 3);
     const projects = projectsData?.projects;
+    const activeProjects = projects?.length;
 
     return (
         <MainLayout>
-            <h1>Welcome, {user?.name}</h1>
+            <h1 className={styles.welcomeTitle}>Welcome, {user?.name}!</h1>
 
-            {/* Tasks */}
-            <section>
-                <h2>Your Tasks</h2>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {/* Summary Widgets */}
+            <section className={styles.widgetGrid}>
+                <div className={styles.widgetCard}>
+                    <h2>Total Tasks</h2>
+                    <p className={styles.widgetValue}>{totalTasks} 📋</p>
+                </div>
+                <div className={styles.widgetCard}>
+                    <h2>Active Projects</h2>
+                    <p className={styles.widgetValue}>{activeProjects} 🏗️</p>
+                </div>
+                <div className={styles.widgetCard}>
+                    <h2>Incomplete Tasks</h2>
+                    <p className={styles.widgetValue}>{incompleteTasks} 🚨</p>
+                </div>
+            </section>
+            <hr />
+
+            {/* Tasks Overview */}
+            <section className={styles.sectionContainer}>
+                <div className={styles.sectionHeader}>
+                    <h2>Your Next Tasks</h2>
+                    <a href="/tasks" className={styles.viewAllLink}>View All Tasks →</a>
+                </div>
+                <div className={styles.cardList}>
                     {
-                        tasks?.map((task) => (
-                            <TaskCard
-                                key={task.id}
-                                title={task.title}
-                                description={task.description}
-                                status={task.status}
-                            />
-                        ))
+                        urgentTasks?.length > 0 ? (
+                            urgentTasks?.map((task) => (
+                                <TaskCard
+                                    key={task.id}
+                                    title={task.title}
+                                    description={task.description}
+                                    status={task.status}
+                                    className={styles.taskCardStyle}
+                                />
+                            ))
+                        ) : (<p className={styles.emptyState}>No urgent tasks to show.</p>)
                     }
                 </div>
             </section>
+            <hr />
 
-            {/* Projects */}
-            <section>
-                <h2>Your Projects</h2>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {/* Projects Overview */}
+            <section className={styles.sectionContainer}>
+                <div className={styles.sectionHeader}>
+                    <h2>Your Active Projects</h2>
+                    <a href="/projects" className={styles.viewAllLink}>View All Projects →</a>
+                </div>
+                <div className={styles.cardList}>
                     {
-                        projects?.map((project) => (
+                        projects?.slice(0, 3).map((project) => (
                             <ProjectCard
                                 key={project.id}
                                 name={project.description}
                                 description={project.description}
                                 progress={Math.min(project.tasksCount * 10, 100)}
+                                className={styles.projectCardStyle}
                             />
                         ))
                     }
