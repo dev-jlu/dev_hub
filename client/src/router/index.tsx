@@ -1,12 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import DashboardPage from "../pages/DashboardPage";
 import TasksPage from "../pages/TasksPage";
 import ProjectsPage from "../pages/ProjectsPage";
 
 const Router = () => {
-    const isLoggedIn = true;
-
     return (
         <BrowserRouter>
             <Routes>
