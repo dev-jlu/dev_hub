@@ -5,7 +5,14 @@ import { GET_TASKS } from "../graphql/queries";
 import type { GetTasksQuery } from "../graphql/types";
 import styles from "../styles/TasksPage.module.css";
 
-const groupTasksByStatus = (tasks: Task[]) => {
+type Task = GetTasksQuery['tasks'][number];
+
+interface GroupedTasksResult {
+    grouped: Record<string, Task[]>;
+    sortedKeys: Array<Task['status']>;
+}
+
+const groupTasksByStatus = (tasks: Task[]): GroupedTasksResult => {
     const grouped: Record<string, Task[]> = {};
     const statusOrder: (Task['status'])[] = ["pending", "in_progress", "completed", "cancelled"];
 
@@ -22,10 +29,16 @@ const groupTasksByStatus = (tasks: Task[]) => {
         }
     });
     
-    const sortedKeys = statusOrder.filter(key => grouped[key].length > 0)
-                                 .concat(Object.keys(grouped).filter(key => !statusOrder.includes(key as Task['status']) && grouped[key].length > 0));
-    
-    return { grouped, sortedKeys };
+    const sortedKeys = statusOrder.filter(key => grouped[key]?.length > 0);
+
+    const otherStatuses = Object.keys(grouped).filter(key => 
+        !statusOrder.includes(key as Task['status']) && grouped[key]?.length > 0
+    );
+
+    return {
+        grouped,
+        sortedKeys: sortedKeys.concat(otherStatuses as Array<Task['status']>)
+    };
 }
 
 const TasksPage = () => {
@@ -41,23 +54,23 @@ const TasksPage = () => {
     }
 
     const tasks = data?.tasks || [];
-    const { grouped, sortedKeys } = groupTasksByStatus(tasks);
+    const { grouped, sortedKeys } = groupTasksByStatus(tasks as Task[]);
 
     return (
         <MainLayout>
-            <h1>📝 All Tasks</h1>
-            {
-                tasks.length === 0 ? (
-                    <p className={styles.emptyState}>No tasks found. Get to work!</p>
-                ) : (
-                    <div className={styles.kanbanContainer}>
-                        {sortedKeys.map((status) => (
-                            <div key={status} className={styles.kanbanColumn}>
+            <h1 className={styles.pageTitle}>📝 All Tasks</h1>
+            
+            {tasks.length === 0 ? (
+                <p className={styles.emptyState}>No tasks found. Get to work!</p>
+            ) : (
+                <div className={styles.kanbanContainer}>
+                    {sortedKeys.map((status) => (
+                        <div key={status} className={styles.kanbanColumn}>
                             <h2 className={styles.columnHeader}>
                                 {status.replace(/_/g, ' ')} ({grouped[status].length})
                             </h2>
                             <div className={styles.taskList}>
-                                {grouped[status].map((task) => (
+                                {grouped[status].map((task: Task) => (
                                     <TaskCard 
                                         key={task.id}
                                         title={task.title}
@@ -68,10 +81,9 @@ const TasksPage = () => {
                                 ))}
                             </div>
                         </div>
-                        ))}
-                    </div>
-                )
-            }
+                    ))}
+                </div>
+            )}
         </MainLayout>
     );
 };
