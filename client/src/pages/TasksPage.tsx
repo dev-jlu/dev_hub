@@ -19,12 +19,12 @@ const TasksPage = () => {
         <MainLayout>
             <h1>Tasks</h1>
             {
-                data!.tasks.map((task: any) => (
+                data!.tasks.map((task) => (
                     <TaskCard 
                         key={task.id}
                         title={task.title}
                         description={task.description}
-                        status={task.status as "pending" | "in_progress" | "cancelled" | "completed"} />
+                        status={task.status} />
                 ))
             }
         </MainLayout>

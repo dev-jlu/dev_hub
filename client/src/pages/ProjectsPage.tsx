@@ -20,7 +20,7 @@ const ProjectsPage = () => {
         <MainLayout>
             <h1>Projects</h1>
             {
-                data!.projects.map((project: any) => (
+                data!.projects.map((project) => (
                     <ProjectCard
                         key={project.id}
                         name={project.name}

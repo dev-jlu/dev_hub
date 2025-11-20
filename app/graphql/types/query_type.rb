@@ -32,13 +32,18 @@ module Types
       argument :status, String, required: false
       argument :project_id, ID, required: false
       argument :limit, Integer, required: false, default_value: 20
+      argument :assignee_id, ID, required: false
     end
 
-    def tasks(status: nil, project_id: nil, limit: 20)
+    def tasks(status: nil, project_id: nil, assignee_id: nil, limit: 20)
       authenticate!
       tasks = Core::Task.all
       tasks = tasks.where(status: status) if status.present?
       tasks = tasks.where(project_id: project_id) if project_id.present?
+      if assignee_id.present?
+        user = User.find_by(id: assignee_id)
+        tasks = tasks.assigned_to(user) if user
+      end
       return tasks.recent(limit)
     end
 

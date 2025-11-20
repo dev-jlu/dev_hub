@@ -2,8 +2,8 @@ import { gql } from "@apollo/client";
 
 // Tasks
 export const GET_TASKS = gql`
-    query GetTasks($status: String, $projectId: ID, $limit: Int) {
-        tasks(status: $status, projectId: $projectId, limit: $limit) {
+    query GetTasks($status: String, $projectId: ID, $assigneeId: ID, $limit: Int) {
+        tasks(status: $status, projectId: $projectId, assigneeId: $assigneeId, limit: $limit) {
             id
             title
             description
@@ -30,6 +30,17 @@ export const GET_PROJECTS = gql`
             name
             description
             tasksCount
+        }
+    }
+`;
+
+// Users
+export const GET_CURRENT_USER = gql`
+    query GetCurrentUser {
+        currentUser {
+            id
+            name
+            email
         }
     }
 `;

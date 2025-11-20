@@ -37,7 +37,6 @@ const MainLayout = ({ children }: Props) => {
                     justifyContent: "space-between",
                     padding: "0 20px",
                 }}>
-                    <h3>Welcome, User</h3>
                     <button>Logout</button>
                 </header>
 

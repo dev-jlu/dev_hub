@@ -15,7 +15,7 @@ export type ProjectType = {
     id: string;
     name: string;
     description: string;
-    task_count: number;
+    tasksCount: number;
 };
 
 export type GetProjectsQuery = {
@@ -38,3 +38,7 @@ export type LoginMutationVariables = {
     email: string;
     password: string;
 }
+
+export type GetCurrentUserQuery = {
+    currentUser: UserType;
+};
