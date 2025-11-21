@@ -1,5 +1,5 @@
 class UserSession < Authlogic::Session::Base
   secure true
-  same_site :none
+  same_site "None"
   httponly true
 end
