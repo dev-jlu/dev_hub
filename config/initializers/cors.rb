@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ENV.fetch("CLIENT_URL") # React dev server
+    origins((ENV.fetch("CLIENT_URL", "").split(",")))
 
     resource "*",
       headers: :any,
