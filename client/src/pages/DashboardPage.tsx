@@ -81,6 +81,8 @@ const DashboardPage = () => {
                                     title={task.title}
                                     description={task.description}
                                     status={task.status}
+                                    project={task.project}
+                                    assignee={task.assignee}
                                     className={styles.taskCardStyle}
                                 />
                             ))

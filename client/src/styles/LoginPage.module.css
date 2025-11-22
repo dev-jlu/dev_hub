@@ -95,3 +95,8 @@
     color: #0056b3;
 }
 
+.errorText {
+    color: #e74c3c;
+    font-weight: 500;
+    margin-top: 5px;
+}
