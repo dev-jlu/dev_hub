@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client/react";
 import { useState, type FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LOGIN } from "../graphql/mutations";
 import { setUser } from "../app/slices/userSlice";
 import type { LoginMutation, LoginMutationVariables } from "../graphql/types";
@@ -43,7 +43,7 @@ const LoginPage = () => {
         <div className={styles.loginContainer}>
             <div className={styles.loginCard}>
                 <h2 className={styles.title}>Welcome Back!</h2>
-                <p className={styles.title}>Sign in to continue</p>
+                <p className={styles.subtitle}>Sign in to continue</p>
 
                 <form className={styles.loginForm} onSubmit={handleSubmit}>
                     <div className={styles.inputGroup}>
@@ -74,12 +74,12 @@ const LoginPage = () => {
                     </button>
 
                     <div className={styles.footerLink}>
-                        <a href="/forgot-password">Forgot Password?</a>
+                        <p>Don't have an account? <Link className={styles.link} to="/signup">Sign Up</Link></p>
                     </div>
                 </form>
-                {error && <p style={{ color: "red" }}>Login failed</p>}
-                { errors.length > 0 && errors.map((error) => (
-                     <p style={{ color: "red" }}>{error}</p>
+                {error && <p className={styles.errorText}>Login failed</p>}
+                { errors.length > 0 && errors.map((error, index) => (
+                     <p key={index} className={styles.errorText}>{error}</p>
                 ))}
             </div>
         </div>

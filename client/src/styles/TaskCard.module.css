@@ -1,28 +1,25 @@
-/* TaskCard.module.css */
-
 .card {
     background: #ffffff;
-    border-radius: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+    border-left: 5px solid;
+    transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border-left: 5px solid; /* Color set via inline style based on status */
-    min-height: 100px; /* Ensure visual space */
-    cursor: grab; /* Suggests drag-and-drop capability, even if not implemented */
 }
 
 .card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 10px;
 }
 
 .title {
@@ -37,114 +34,150 @@
 
 .actions {
     display: flex;
-    gap: 5px;
-    align-items: center;
+    gap: 8px;
     flex-shrink: 0;
 }
 
-/* Edit and Delete button styles (reusing logic from ProjectCard) */
-.editButton {
+.editButton,
+.deleteButton,
+.cancelDeleteButton,
+.confirmDeleteButton {
     background: none;
     border: none;
-    color: #3498db;
     cursor: pointer;
     padding: 4px;
     border-radius: 4px;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.editButton:hover {
-    background-color: #e6f0fa;
-}
+.editButton svg { color: #3498db; }
+.deleteButton svg { color: #e74c3c; }
 
-.deleteButton {
-    background: none;
-    border: none;
-    color: #e74c3c;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-}
-
-.deleteButton:hover {
-    background-color: #ffe8e6;
-}
+.editButton:hover { background-color: #ecf0f1; }
+.deleteButton:hover { background-color: #fdedee; }
 
 .confirmActions {
     display: flex;
     gap: 5px;
-    align-items: center;
-}
-
-.cancelDeleteButton, .confirmDeleteButton {
-    padding: 4px 8px;
-    border: none;
-    border-radius: 4px;
-    font-weight: 600;
-    cursor: pointer;
     font-size: 0.8rem;
 }
 
+.cancelDeleteButton, .confirmDeleteButton {
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: white;
+}
+
 .cancelDeleteButton {
-    background-color: #bdc3c7;
-    color: #333;
+    background-color: #95a5a6;
+}
+.cancelDeleteButton:hover {
+    background-color: #7f8c8d;
 }
 
 .confirmDeleteButton {
     background-color: #e74c3c;
-    color: white;
+}
+.confirmDeleteButton:hover {
+    background-color: #c0392b;
 }
 
-
-/* General Content */
 .description {
     font-size: 0.9rem;
-    color: #555;
-    margin: 0;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    color: #34495e;
+    margin-bottom: 15px;
+    line-height: 1.5;
 }
 
-.errorText {
-    color: #e74c3c;
-    font-size: 0.8rem;
-}
-
-.confirmationText {
-    font-size: 0.8rem;
-    color: #e74c3c;
-    font-weight: 500;
-    margin: 0;
-}
-
-/* Footer and Status/Project Tags */
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
-    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.statusPill {
-    color: white;
-    padding: 4px 8px;
-    border-radius: 5px;
+.statusSelect {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
     font-weight: 600;
-    text-transform: capitalize;
+    color: white;
+    border: 1px solid;
+    cursor: pointer;
+    appearance: none;
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='white' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+    padding-right: 25px;
+}
+
+.assigneeContainer {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    padding: 4px 0 4px 8px;
+}
+
+.assigneeLabel {
+    display: flex;
+    align-items: center;
+    color: #34495e;
+    margin-right: 5px;
+}
+
+.assigneeLabel svg {
+    color: #3498db;
+}
+
+.assigneeSelect {
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%2334495e' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 25px;
 }
 
 .projectTag {
     background-color: #ecf0f1;
-    color: #7f8c8d;
-    padding: 3px 6px;
-    border-radius: 5px;
+    color: #34495e;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 500;
-    max-width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+}
+
+.confirmationText {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 10px;
+    text-align: right;
+    padding-top: 5px;
+    border-top: 1px dashed #ecf0f1;
+}
+
+.errorText {
+    color: #e74c3c;
+    background-color: #fdedee;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    border-left: 3px solid #e74c3c;
 }

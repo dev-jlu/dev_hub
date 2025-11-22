@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client/react';
-import { CREATE_PROJECT, UPDATE_PROJECT } from '../../graphql/mutations'; // <-- Import UPDATE_PROJECT
+import { CREATE_PROJECT, UPDATE_PROJECT } from '../../graphql/mutations';
 import { GET_PROJECTS } from '../../graphql/queries';
 import styles from './ProjectForm.module.css';
 import { type ProjectType, type GetProjectsQuery, type ProjectMutationVariables } from '../../graphql/types';
 
 interface ProjectFormProps {
     onClose: () => void;
-    // Initial data is optional: if present, we are updating.
     initialData?: { id: string, name: string, description: string }; 
 }
 
@@ -19,7 +18,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onClose, initialData }) => {
     const [description, setDescription] = useState(initialData?.description || '');
     const [error, setError] = useState('');
 
-    // Select the correct mutation based on mode
     const mutation = isUpdate ? UPDATE_PROJECT : CREATE_PROJECT;
     const actionName = isUpdate ? 'Update' : 'Create';
 
@@ -36,7 +34,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onClose, initialData }) => {
                 }
             }
         },
-        onCompleted: onClose, // Close the modal on success
+        onCompleted: onClose,
         onError: (e) => setError(e.message),
     });
 
@@ -49,14 +47,11 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onClose, initialData }) => {
             return;
         }
 
-        // Construct variables based on whether we are creating or updating
         const variables = isUpdate
             ? { id: initialData?.id, name, description }
             : { name, description };
 
-        // Execute Mutation
         saveProject({ variables }).catch(() => {
-            // Error handling is done in onError
         });
     };
 

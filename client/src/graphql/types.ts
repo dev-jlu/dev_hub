@@ -3,8 +3,8 @@ export type TaskType = {
     title: string;
     description: string;
     status: "pending" | "in_progress" | "cancelled" | "completed";
-    project?: ProjectType;
-    assignee?: { id: string; name: string, email: string } | null;
+    project?: ProjectType | null;
+    assignee?: UserType | null;
 };
 
 export type GetTasksQuery = {
@@ -60,6 +60,24 @@ export type LoginMutationVariables = {
     password: string;
 }
 
+export type RegisterMutation = {
+    createUser: {
+        user: UserType | null;
+        errors: string[];
+    }
+}
+
+export type RegisterMutationVariables = {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+}
+
 export type GetCurrentUserQuery = {
     currentUser: UserType;
 };
+
+export type GetUsersQuery = {
+    users: UserType[];
+}

@@ -35,6 +35,7 @@ const DashboardPage = () => {
         return <MainLayout>Error loading user: {projectsError.message}</MainLayout>;
     }
 
+    console.log(userData)
     const user = userData?.currentUser;
     const tasks = tasksData?.tasks || [];
     const totalTasks = tasks?.length;
@@ -76,6 +77,7 @@ const DashboardPage = () => {
                             urgentTasks?.map((task) => (
                                 <TaskCard
                                     key={task.id}
+                                    id={task.id}
                                     title={task.title}
                                     description={task.description}
                                     status={task.status}
@@ -99,6 +101,7 @@ const DashboardPage = () => {
                         projects?.slice(0, 3).map((project) => (
                             <ProjectCard
                                 key={project.id}
+                                id={project.id}
                                 name={project.description}
                                 description={project.description}
                                 progress={Math.min(project.tasksCount * 10, 100)}

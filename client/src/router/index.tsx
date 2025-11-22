@@ -4,7 +4,8 @@ import DashboardPage from "../pages/DashboardPage";
 import TasksPage from "../pages/TasksPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import ProtectedRoute from "./ProtectedRoute";
-import PublicRoute from "./PublicRoute"; // Add this line
+import PublicRoute from "./PublicRoute";
+import SignupPage from "../pages/SignUpPage";
 
 const Router = () => {
     return (
@@ -52,6 +53,15 @@ const Router = () => {
                             <DashboardPage/>
                         </ProtectedRoute> 
                     } 
+                />
+                
+                <Route
+                    path="/signup"
+                    element={
+                        <PublicRoute>
+                            <SignupPage /> 
+                        </PublicRoute>
+                    }
                 />
             </Routes>
         </BrowserRouter>

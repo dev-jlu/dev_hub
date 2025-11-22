@@ -1,5 +1,5 @@
 module Mutations
-  class CreateUser < ProtectedMutation
+  class CreateUser < BaseMutation
     description "Create a new user"
 
     # Input arguments

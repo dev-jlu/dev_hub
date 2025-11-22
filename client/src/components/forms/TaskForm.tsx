@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'; // <-- Import useEffect
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client/react';
-import { CREATE_TASK, UPDATE_TASK } from '../../graphql/mutations'; // <-- Import UPDATE_TASK
+import { CREATE_TASK, UPDATE_TASK } from '../../graphql/mutations';
 import { GET_PROJECTS, GET_TASKS } from '../../graphql/queries';
-import type { GetProjectsQuery, ProjectType, TaskMutationVariables, TaskType } from '../../graphql/types';
+import type { GetProjectsQuery, TaskMutationVariables, TaskType } from '../../graphql/types';
 import styles from './TaskForm.module.css';
 
 interface TaskFormProps {
     onClose: () => void;
-    initialData?: TaskType; // Optional initial data for update mode
+    initialData?: TaskType;
 }
 
-// Fixed list of task statuses
 const TASK_STATUSES = [
     { value: 'pending', label: 'Pending' },
     { value: 'in_progress', label: 'In Progress' },
@@ -19,14 +18,12 @@ const TASK_STATUSES = [
 ];
 
 const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
-    // Determine if we are updating or creating
     const isUpdate = !!initialData;
     const initialProjectId = initialData?.project?.id || '';
 
     const [title, setTitle] = useState(initialData?.title || '');
     const [description, setDescription] = useState(initialData?.description || '');
     const [projectId, setProjectId] = useState(initialProjectId);
-    // Use initial status or default to 'pending' for new tasks
     const [status, setStatus] = useState(initialData?.status || 'pending');
     const [error, setError] = useState('');
 
@@ -39,13 +36,10 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
         fetchPolicy: 'cache-first',
     });
 
-    // Use the correct mutation based on mode
     const mutation = isUpdate ? UPDATE_TASK : CREATE_TASK;
     const actionName = isUpdate ? 'Update' : 'Create';
 
-    // --- Mutation Hook ---
     const [executeMutation, { loading: taskMutating }] = useMutation<TaskType, TaskMutationVariables>(mutation, {
-        // Refetch tasks after creation/update to ensure lists are current
         refetchQueries: [
             { query: GET_TASKS, variables: { limit: 100 } }
         ],
@@ -53,8 +47,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
         onError: (e) => setError(e.message),
     });
 
-    // Effect to set the initial project ID if not set (only for Create mode)
-    // and projects are loaded and available
     useEffect(() => {
         if (!isUpdate && projectsData && projectsData.projects.length > 0 && !projectId) {
             setProjectId(projectsData.projects[0].id);
@@ -71,7 +63,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
             return;
         }
         
-        // Project ID is required for creation, but can be omitted in update if not changed
         if (!isUpdate && !projectId) {
             setError("Project is required for a new task.");
             return;
@@ -89,7 +80,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                 projectId 
               };
 
-        // Execute Mutation
         executeMutation({ variables }).catch(() => {});
     };
 
@@ -112,7 +102,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                 <h2 className={styles.modalTitle}>{actionName} Task: {isUpdate ? initialData?.title : ''}</h2>
                 
                 <form onSubmit={handleSubmit} className={styles.formContainer}>
-                    {/* 1. Title */}
+                    {/* Title */}
                     <div className={styles.inputGroup}>
                         <label htmlFor="title" className={styles.label}>Task Title *</label>
                         <input
@@ -126,7 +116,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                         />
                     </div>
                     
-                    {/* 2. Description */}
+                    {/* Description */}
                     <div className={styles.inputGroup}>
                         <label htmlFor="description" className={styles.label}>Description</label>
                         <textarea
@@ -139,7 +129,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                         />
                     </div>
                     
-                    {/* 3. Status (Only in Update Mode) */}
+                    {/* Status (Only in Update Mode) */}
                     {isUpdate && (
                         <div className={styles.inputGroup}>
                             <label htmlFor="status" className={styles.label}>Status</label>
@@ -159,7 +149,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onClose, initialData }) => {
                         </div>
                     )}
 
-                    {/* 4. Project Dropdown (Only in Create Mode) */}
+                    {/* Project Dropdown (Only in Create Mode) */}
                     {!isUpdate && (
                         <div className={styles.inputGroup}>
                             <label htmlFor="projectId" className={styles.label}>Assign to Project *</label>

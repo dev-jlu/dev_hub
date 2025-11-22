@@ -1,4 +1,3 @@
-// TasksPage.tsx
 import React, { useState } from 'react'; 
 import { useQuery } from "@apollo/client/react";
 import TaskCard from "../components/cards/TaskCard";
@@ -24,7 +23,6 @@ const groupTasksByStatus = (tasks: Task[]): GroupedTasksResult => {
     });
 
     tasks.forEach((task: Task) => {
-        // Ensure task and status exist
         if (!task || !task.status) return; 
         
         const status = task.status;
@@ -55,10 +53,9 @@ const TasksPage: React.FC = () => {
         return <MainLayout>Loading tasks...</MainLayout>;
     }
     if (error) {
-        return <MainLayout>Error loading tasks: {error.message}</MainLayout>; // Show error message
+        return <MainLayout>Error loading tasks: {error.message}</MainLayout>;
     }
     
-    // Ensure tasks array is valid before processing
     const tasks = data?.tasks?.filter(t => t != null) || [];
     const { grouped, sortedKeys } = groupTasksByStatus(tasks as Task[]);
 
@@ -89,11 +86,12 @@ const TasksPage: React.FC = () => {
                                         grouped[status].map((task: Task) => (
                                             <TaskCard 
                                                 key={task.id}
-                                                id={task.id} // <-- **PASSED**
+                                                id={task.id}
                                                 title={task.title}
                                                 description={task.description}
                                                 status={task.status} 
-                                                project={task.project} // <-- **PASSED**
+                                                project={task.project}
+                                                assignee={task.assignee}
                                                 className={styles.fullTaskCard}
                                             />
                                         ))

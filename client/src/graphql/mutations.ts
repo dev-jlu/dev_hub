@@ -140,3 +140,16 @@ export const DELETE_PROJECT = gql`
         }
     }
 `;
+
+export const REGISTER = gql`
+    mutation RegisterUser($name: String!, $email: String!, $password: String!, $passwordConfirmation: String!) {
+        createUser(name: $name, email: $email, password: $password, passwordConfirmation: $passwordConfirmation) {
+            user {
+                id
+                name
+                email
+            }
+            errors
+        }
+    }
+`;

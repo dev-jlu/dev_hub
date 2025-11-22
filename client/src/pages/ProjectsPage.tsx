@@ -38,7 +38,7 @@ const ProjectsPage = () => {
                     data!.projects.map((project) => (
                         <ProjectCard
                             key={project.id}
-                            id={project.id} // <-- **NEW: Pass the project ID**
+                            id={project.id}
                             name={project.name}
                             description={project.description}
                             progress={Math.min(project.tasksCount * 10, 100)}
