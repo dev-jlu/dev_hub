@@ -1,0 +1,141 @@
+/* ProjectCard.module.css */
+
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 5px solid #3498db; /* Default border highlight */
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* --- New Edit Button Style --- */
+.editButton {
+    background: none;
+    border: none;
+    color: #3498db; /* Blue for editing */
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.editButton:hover {
+    background-color: #e6f0fa;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.deleteButton:hover {
+    background-color: #ffe8e6;
+}
+
+/* Confirmation Styles */
+.confirmActions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.confirmationText {
+    font-size: 0.9rem;
+    color: #e74c3c;
+    font-weight: 500;
+    margin: 0;
+}
+
+.cancelDeleteButton, .confirmDeleteButton {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.cancelDeleteButton {
+    background-color: #bdc3c7;
+    color: #333;
+}
+
+.confirmDeleteButton {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.confirmDeleteButton:hover {
+    background-color: #c0392b;
+}
+
+/* General Content */
+.description {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0;
+    flex-grow: 1; /* Pushes progress bar to the bottom */
+}
+
+/* Progress Bar Styles */
+.progressContainer {
+    margin-top: 15px;
+}
+
+.progressLabel {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-bottom: 5px;
+}
+
+.progressBar {
+    height: 8px;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFiller {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease-in-out;
+}
+
+.errorText {
+    color: #e74c3c;
+    font-size: 0.9rem;
+}

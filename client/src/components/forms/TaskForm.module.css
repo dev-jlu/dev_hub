@@ -1,0 +1,130 @@
+/* TaskForm.module.css - Reusing Modal structure from ProjectForm styles */
+
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modalTitle {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input, .textarea, .select { /* <-- Added .select */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fff; /* Ensure select has a white background */
+}
+
+.input:focus, .textarea:focus, .select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.errorText {
+    color: #e74c3c;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.warningText { /* Added warning style for 'No projects found' */
+    color: #f39c12;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submitButton, .cancelButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.submitButton {
+    background-color: #3498db;
+    color: white;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+.cancelButton {
+    background-color: #ecf0f1;
+    color: #333;
+}
+
+.cancelButton:hover:not(:disabled) {
+    background-color: #dcdde1;
+}
+
+.submitButton:disabled, .cancelButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.loadingText {
+    text-align: center;
+    color: #3498db;
+    font-weight: 500;
+}

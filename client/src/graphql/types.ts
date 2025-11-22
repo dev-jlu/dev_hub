@@ -3,12 +3,20 @@ export type TaskType = {
     title: string;
     description: string;
     status: "pending" | "in_progress" | "cancelled" | "completed";
-    project?: { id: string, name: string, description: string } | null;
+    project?: ProjectType;
     assignee?: { id: string; name: string, email: string } | null;
 };
 
 export type GetTasksQuery = {
     tasks: TaskType[];
+};
+
+export type TaskMutationVariables = {
+    projectId?: string;
+    title?: string;
+    description?: string;
+    status?: string;
+    assigneeId?: string;
 };
 
 export type TasksQueryVariables = {
@@ -28,6 +36,11 @@ export type ProjectType = {
 export type GetProjectsQuery = {
     projects: ProjectType[];
 };
+
+export type ProjectMutationVariables = {
+    name?: string;
+    description?: string;
+}
 
 export type UserType = {
     id: string;
