@@ -8,6 +8,17 @@ export const LOGIN = gql`
                 name
                 email
             }
+            message
+            errors
+        }
+    }
+`;
+
+export const LOGOUT = gql`
+    mutation Logout {
+        logout {
+            message
+            errors
         }
     }
 `;

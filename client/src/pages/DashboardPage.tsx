@@ -1,21 +1,32 @@
 import MainLayout from "../layouts/MainLayout";
 import { useQuery } from "@apollo/client/react";
-import { type GetTasksQuery, type GetCurrentUserQuery, type GetProjectsQuery } from "../graphql/types";
+import { type GetTasksQuery, type GetCurrentUserQuery, type GetProjectsQuery, type TasksQueryVariables } from "../graphql/types";
 import { GET_CURRENT_USER, GET_PROJECTS, GET_TASKS } from "../graphql/queries";
 import TaskCard from "../components/cards/TaskCard";
 import ProjectCard from "../components/cards/ProjectCard";
 import styles from "../styles/Dashboard.module.css"
+import { Link } from "react-router-dom";
 
 const DashboardPage = () => {
     const { data: userData, loading: userLoading, error: userError } = useQuery<GetCurrentUserQuery>(GET_CURRENT_USER);
-    const { data: tasksData, loading: tasksLoading, error: tasksError } = useQuery<GetTasksQuery>(GET_TASKS);
+    const userId = userData?.currentUser?.id;
+    const { data: tasksData, loading: tasksLoading, error: tasksError } = useQuery<GetTasksQuery, TasksQueryVariables>(GET_TASKS, {
+        variables: {
+            assigneeId: userId!,
+        },
+        skip: !userId,
+    });
     const { data: projectsData, loading: projectsLoading, error: projectsError } = useQuery<GetProjectsQuery>(GET_PROJECTS);
 
-    if (userLoading || tasksLoading || projectsLoading) {
+    if (userLoading || projectsLoading) {
         return <MainLayout>Loading...</MainLayout>;
     }
     if (userError) {
         return <MainLayout>Error loading user: {userError.message}</MainLayout>;
+    }
+
+    if (tasksLoading) {
+        return <MainLayout>Loading...</MainLayout>;
     }
     if (tasksError) {
         return <MainLayout>Error loading user: {tasksError.message}</MainLayout>;
@@ -57,7 +68,7 @@ const DashboardPage = () => {
             <section className={styles.sectionContainer}>
                 <div className={styles.sectionHeader}>
                     <h2>Your Next Tasks</h2>
-                    <a href="/tasks" className={styles.viewAllLink}>View All Tasks →</a>
+                    <Link to="/tasks" className={styles.viewAllLink}>View All Tasks →</Link>
                 </div>
                 <div className={styles.cardList}>
                     {
@@ -81,7 +92,7 @@ const DashboardPage = () => {
             <section className={styles.sectionContainer}>
                 <div className={styles.sectionHeader}>
                     <h2>Your Active Projects</h2>
-                    <a href="/projects" className={styles.viewAllLink}>View All Projects →</a>
+                    <Link to="/projects" className={styles.viewAllLink}>View All Projects →</Link>
                 </div>
                 <div className={styles.cardList}>
                     {

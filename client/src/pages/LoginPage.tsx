@@ -13,10 +13,12 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [login, { loading, error }] = useMutation<LoginMutation, LoginMutationVariables>(LOGIN);
+    const [errors, setErrors] = useState<string[]>([]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
+            setErrors([]);
             const { data } = await login({
                 variables: {
                     email,
@@ -26,7 +28,11 @@ const LoginPage = () => {
 
             if (data?.login?.user) {
                 dispatch(setUser(data.login.user));
+                localStorage.setItem("user", JSON.stringify(data.login.user));
                 navigate("/dashboard"); //dashboard redirect
+                
+            } else {
+                setErrors(data?.login?.errors ?? []);
             }
         } catch(err) {
             console.error(err);
@@ -72,6 +78,9 @@ const LoginPage = () => {
                     </div>
                 </form>
                 {error && <p style={{ color: "red" }}>Login failed</p>}
+                { errors.length > 0 && errors.map((error) => (
+                     <p style={{ color: "red" }}>{error}</p>
+                ))}
             </div>
         </div>
     );

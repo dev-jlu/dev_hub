@@ -8,11 +8,15 @@ import { apolloClient } from './apollo/client';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './app/store';
 
+import AuthInitializer from './components/auth/AuthInitializer.tsx';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ReduxProvider store={store}>
       <ApolloProvider client={apolloClient}>
-        <App />
+        <AuthInitializer>
+          <App />
+        </AuthInitializer>
       </ApolloProvider>
     </ReduxProvider>
   </StrictMode>,

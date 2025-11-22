@@ -4,12 +4,20 @@ import DashboardPage from "../pages/DashboardPage";
 import TasksPage from "../pages/TasksPage";
 import ProjectsPage from "../pages/ProjectsPage";
 import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute"; // Add this line
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={ <LoginPage /> } />
+                <Route 
+                    path="/login" 
+                    element={ 
+                        <PublicRoute>
+                            <LoginPage /> 
+                        </PublicRoute>
+                    } 
+                />
                 <Route 
                     path="/dashboard" 
                     element={ 

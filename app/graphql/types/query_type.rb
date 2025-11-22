@@ -64,7 +64,7 @@ module Types
       return User.all
     end
 
-    field :current_user, Types::UserType, null: false, description: "Get the currently logged-in user"
+    field :current_user, Types::UserType, null: true, description: "Get the currently logged-in user"
 
     def current_user
       return context[:current_user]
@@ -84,10 +84,9 @@ module Types
     private
 
     def authenticate!
-      # user = context[:current_user]
-      # raise GraphQL::ExecutionError, "Unauthorized" unless user
-      # return user
-      return true;
+      user = context[:current_user]
+      raise GraphQL::ExecutionError, "Unauthorized" unless user
+      return user
     end
   end
 end

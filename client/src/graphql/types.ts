@@ -11,6 +11,13 @@ export type GetTasksQuery = {
     tasks: TaskType[];
 };
 
+export type TasksQueryVariables = {
+    status?: string; 
+    projectId?: string; 
+    assigneeId?: string; 
+    limit?: number;
+}
+
 export type ProjectType = {
     id: string;
     name: string;
@@ -31,6 +38,7 @@ export type UserType = {
 export type LoginMutation = {
     login: {
         user: UserType | null;
+        errors: string[];
     };
 };
 
